@@ -24,11 +24,12 @@ Things you may want to cover:
 * ...
 
 # Resources
+### Docker
 - Setting up API with with Docker https://dev.to/joker666/deploy-a-ruby-on-rails-api-only-application-in-docker-with-postgresql-1933
-- Devise-JWT https://medium.com/ruby-daily/a-devise-jwt-tutorial-for-authenticating-users-in-ruby-on-rails-ca214898318e
-- More JWT https://medium.com/@brentkearney/json-web-token-jwt-and-html-logins-with-devise-and-ruby-on-rails-5-9d5e8195193d
 
 ### Solving Authentication Devise-JWT, AllowList
+- Devise-JWT https://medium.com/ruby-daily/a-devise-jwt-tutorial-for-authenticating-users-in-ruby-on-rails-ca214898318e
+- More JWT https://medium.com/@brentkearney/json-web-token-jwt-and-html-logins-with-devise-and-ruby-on-rails-5-9d5e8195193d
 - https://www.programmingtil.com/contents/setting-up-jwts-in-ruby-on-rails-with-devise-jwt
 - https://github.com/davidwparker/programmingtil-rails/tree/ep3
 
@@ -40,9 +41,12 @@ Things you may want to cover:
 - https://medium.com/swlh/polymorphic-associations-in-rails-with-example-8375de65510b
 - https://guides.rubyonrails.org/association_basics.html#polymorphic-associations
 
-## Nano
+### Editing Nano files
 
     $ EDITOR=nano rails credentials:edit
 
  After editing, then:
  `ctrl+x`, then `y`, then `enter` to close and save if you’re using the nano editor.
+ 
+ ### Processing images with ActiveStorage
+ - https://www.microverse.org/blog/how-to-build-an-image-upload-feature-with-rails-and-active-storage
