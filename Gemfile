@@ -22,3 +22,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.8"
 gem "devise-jwt", "~> 0.9.0"
 gem "rack-cors", "~> 1.1"
+gem "friendly_id", "~> 5.4"
+
+gem "kaminari", "~> 1.2"

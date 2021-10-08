@@ -1,4 +1,10 @@
 class Painter < ApplicationRecord
   belongs_to :user
   has_many :paintings
+  has_many :exhibitions
+  has_many :images, :as => :imageable
+  paginates_per 50
+
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 end

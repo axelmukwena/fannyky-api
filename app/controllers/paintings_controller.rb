@@ -1,5 +1,5 @@
 class PaintingsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  # before_action :authenticate_user!, except: [:index, :show]
   before_action :set_painter
   before_action :set_painting, except: [:new, :create, :index]
 
@@ -19,6 +19,7 @@ class PaintingsController < ApplicationController
 
   def index
     @paintings = @painter.paintings
+    @paintings.order(date_created: :desc).page params[:page]
     render json: @paintings
   end
 
@@ -46,14 +47,14 @@ class PaintingsController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.find(params[:id])
+    @painter = Painter.friendly.find(params[:painter_id])
   end
 
   def painting_params
-    params.require(:painting).permit(:title, :description, :to, :language, painter: @painter, user: current_user)
+    params.require(:painting).permit(:title, :description, :date_created, painter: @painter, user: current_user)
   end
 
   def set_painting
-    @painting = Painting.find(params[:id])
+    @painting = Painting.friendly.find(params[:id])
   end
 end

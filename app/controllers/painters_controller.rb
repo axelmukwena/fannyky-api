@@ -1,5 +1,5 @@
 class PaintersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  # before_action :authenticate_user!, except: [:index, :show]
   before_action :set_painter, except: [:new, :create, :index]
 
   def new
@@ -45,7 +45,7 @@ class PaintersController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.find(params[:id])
+    @painter = Painter.friendly.find(params[:id])
   end
 
   def painter_params

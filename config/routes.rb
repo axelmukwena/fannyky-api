@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   scope :api do
-    resources :painters do
-      resources :paintings
-    end
     devise_for :users,
                path: '',
                path_names: {
@@ -14,5 +11,13 @@ Rails.application.routes.draw do
                  sessions: 'users/sessions',
                  registrations: 'users/registrations'
                }
+
+    get '/painters/', to: 'painters#index', as: 'painters'
+
+    resources :painters, path: '' do
+      resources :paintings
+      resources :exhibitions
+    end
+
   end
 end

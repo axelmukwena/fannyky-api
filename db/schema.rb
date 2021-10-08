@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_124948) do
+ActiveRecord::Schema.define(version: 2021_10_08_063500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,38 @@ ActiveRecord::Schema.define(version: 2021_10_07_124948) do
     t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
   end
 
+  create_table "exhibitions", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "link"
+    t.string "location"
+    t.string "slug"
+    t.integer "images_count"
+    t.bigint "painter_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "when"
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
+    t.index ["title"], name: "index_exhibitions_on_title", unique: true
+    t.index ["user_id"], name: "index_exhibitions_on_user_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image"
+    t.integer "priority"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
+  end
+
   create_table "painters", force: :cascade do |t|
     t.string "name"
     t.text "about"
-    t.string "image"
     t.string "email"
     t.string "phone"
     t.string "facebook"
@@ -42,6 +70,10 @@ ActiveRecord::Schema.define(version: 2021_10_07_124948) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.string "slug"
+    t.integer "images_count"
+    t.index ["name"], name: "index_painters_on_name", unique: true
+    t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
   end
 
@@ -51,10 +83,13 @@ ActiveRecord::Schema.define(version: 2021_10_07_124948) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
-    t.string "date"
     t.bigint "painter_id", null: false
+    t.string "slug"
+    t.integer "images_count"
+    t.date "date_created"
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
+    t.index ["slug"], name: "index_paintings_on_slug", unique: true
+    t.index ["title"], name: "index_paintings_on_title", unique: true
     t.index ["user_id"], name: "index_paintings_on_user_id"
   end
 
@@ -72,6 +107,8 @@ ActiveRecord::Schema.define(version: 2021_10_07_124948) do
   end
 
   add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
+  add_foreign_key "exhibitions", "painters"
+  add_foreign_key "exhibitions", "users"
   add_foreign_key "paintings", "painters"
   add_foreign_key "paintings", "users"
 end

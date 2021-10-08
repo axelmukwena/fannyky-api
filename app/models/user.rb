@@ -8,4 +8,5 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :paintings
   has_many :painters
+  has_many :exhibitions
 end
