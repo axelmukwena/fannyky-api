@@ -1,5 +1,5 @@
 class PaintersController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_painter, except: [:new, :create, :index]
 
   def new
@@ -17,7 +17,7 @@ class PaintersController < ApplicationController
   end
 
   def index
-    @painters = Painter.all
+    @painters = Painter.order(created_at: :desc).page params[:page]
     render json: @painters
   end
 
@@ -49,9 +49,9 @@ class PaintersController < ApplicationController
   end
 
   def painter_params
-    params.require(:painter).permit(:name, :about, :image,
+    params.require(:painter).permit(:name, :about,
                                     :email, :phone, :facebook,
                                     :instagram, :twitter,
-                                    user: current_user)
+                                    user: current_user, images: [])
   end
 end

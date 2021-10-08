@@ -2,7 +2,7 @@ class Painter < ApplicationRecord
   belongs_to :user
   has_many :paintings
   has_many :exhibitions
-  has_many :images, :as => :imageable
+  has_many_attached :images
   paginates_per 50
 
   extend FriendlyId

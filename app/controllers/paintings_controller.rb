@@ -1,5 +1,5 @@
 class PaintingsController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_painter
   before_action :set_painting, except: [:new, :create, :index]
 
@@ -51,7 +51,9 @@ class PaintingsController < ApplicationController
   end
 
   def painting_params
-    params.require(:painting).permit(:title, :description, :date_created, painter: @painter, user: current_user)
+    params.require(:painting).permit(:title, :description,
+                                     :date_created, painter: @painter,
+                                     user: current_user, images: [])
   end
 
   def set_painting

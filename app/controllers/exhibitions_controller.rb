@@ -1,5 +1,5 @@
 class ExhibitionsController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_painter
   before_action :set_exhibition, except: [:new, :create, :index]
 
@@ -51,8 +51,10 @@ class ExhibitionsController < ApplicationController
   end
 
   def exhibition_params
-    params.require(:exhibition).permit(:title, :description, :start_date,
-                                       :end_date, :link, :location, painter: @painter, user: current_user)
+    params.require(:exhibition).permit(:title, :description,
+                                       :start_date, :end_date, :link,
+                                       :location, painter: @painter,
+                                       user: current_user, images: [])
   end
 
   def set_exhibition
