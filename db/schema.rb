@@ -10,17 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_065248) do
+ActiveRecord::Schema.define(version: 2021_10_07_124948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "allowlisted_jwts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.string "aud", default: "UNKNOWN"
+    t.string "remote_ip"
+    t.string "os_data"
+    t.string "browser_data"
+    t.string "device_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_allowlisted_jwts_on_jti", unique: true
+    t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
+  end
+
+  create_table "painters", force: :cascade do |t|
+    t.string "name"
+    t.text "about"
+    t.string "image"
+    t.string "email"
+    t.string "phone"
+    t.string "facebook"
+    t.string "instagram"
+    t.string "twitter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_painters_on_user_id"
+  end
+
   create_table "paintings", force: :cascade do |t|
     t.string "title"
-    t.text "body"
+    t.text "description"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.string "date"
+    t.bigint "painter_id", null: false
+    t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["user_id"], name: "index_paintings_on_user_id"
   end
 
@@ -32,9 +66,12 @@ ActiveRecord::Schema.define(version: 2021_10_05_065248) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
+  add_foreign_key "paintings", "painters"
   add_foreign_key "paintings", "users"
 end

@@ -1,7 +1,23 @@
 class PaintersController < ApplicationController
-  before_action :find_painter, only: :show
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_painter, except: [:new, :create, :index]
+
+  def new
+    @painter = Painter.new
+  end
+
+  def create
+    @painter = current_user.painters.build(painter_params)
+
+    if @painter.save
+      render json: { message: 'Painter created.' }, status: :ok
+    else
+      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
   def index
-    @painters = User.all
+    @painters = Painter.all
     render json: @painters
   end
 
@@ -9,8 +25,33 @@ class PaintersController < ApplicationController
     render json: @painter
   end
 
+  def update
+    if @painter.valid?
+      @painter.update(painter_params)
+      render json: { message: 'Painter updated.' }, status: :ok
+    else
+      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
+  def destroy
+    if @painter.destroy
+      render json: { message: 'Painter deleted.' }, status: :ok
+    else
+      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
   private
-  def find_painter
-    @painter = User.find(params[:id])
+
+  def set_painter
+    @painter = Painter.find(params[:id])
+  end
+
+  def painter_params
+    params.require(:painter).permit(:name, :about, :image,
+                                    :email, :phone, :facebook,
+                                    :instagram, :twitter,
+                                    user: current_user)
   end
 end

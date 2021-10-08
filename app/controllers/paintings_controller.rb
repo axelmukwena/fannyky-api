@@ -1,7 +1,24 @@
 class PaintingsController < ApplicationController
-  before_action :find_painting, only: :show
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_painter
+  before_action :set_painting, except: [:new, :create, :index]
+
+  def new
+    @painting = Painting.new
+  end
+
+  def create
+    @painting = @painter.paintings.build(painting_params)
+
+    if @painting.save
+      render json: { message: 'Painting created.' }, status: :ok
+    else
+      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
   def index
-    @paintings = Painting.all
+    @paintings = @painter.paintings
     render json: @paintings
   end
 
@@ -9,8 +26,34 @@ class PaintingsController < ApplicationController
     render json: @painting
   end
 
+  def update
+    if @painting.valid?
+      @painting.update(painting_params)
+      render json: { message: 'Painting updated.' }, status: :ok
+    else
+      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
+  def destroy
+    if @painting.destroy
+      render json: { message: 'Painting deleted.' }, status: :ok
+    else
+      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+    end
+  end
+
   private
-  def find_painting
+
+  def set_painter
+    @painter = Painter.find(params[:id])
+  end
+
+  def painting_params
+    params.require(:painting).permit(:title, :description, :to, :language, painter: @painter, user: current_user)
+  end
+
+  def set_painting
     @painting = Painting.find(params[:id])
   end
 end
