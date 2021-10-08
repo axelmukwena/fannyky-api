@@ -33,7 +33,12 @@ Things you may want to cover:
 - https://github.com/davidwparker/programmingtil-rails/tree/ep3
 
 ### Disable registerable in users to only allow invitations
+- https://gorails.com/forum/new-users-only-created-by-admin-user
 - https://github.com/scambra/devise_invitable
+
+### Ploymorphism associations
+- https://medium.com/swlh/polymorphic-associations-in-rails-with-example-8375de65510b
+- https://guides.rubyonrails.org/association_basics.html#polymorphic-associations
 
 ## Nano
 
