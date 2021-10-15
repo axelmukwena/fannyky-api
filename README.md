@@ -48,5 +48,8 @@ Things you may want to cover:
  After editing, then:
  `ctrl+x`, then `y`, then `enter` to close and save if you’re using the nano editor.
  
- ### Processing images with ActiveStorage
+### Processing images with ActiveStorage
  - https://www.microverse.org/blog/how-to-build-an-image-upload-feature-with-rails-and-active-storage
+
+### Serializers
+ - https://betterprogramming.pub/how-to-fire-up-a-rails-api-for-your-new-project-6fad595caf07
