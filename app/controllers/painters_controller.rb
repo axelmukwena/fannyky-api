@@ -1,5 +1,5 @@
 class PaintersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorized, except: [:index, :show]
   before_action :set_painter, except: [:new, :create, :index]
 
   def new

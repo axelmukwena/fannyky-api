@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_114848) do
+ActiveRecord::Schema.define(version: 2021_10_18_080132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,21 +43,6 @@ ActiveRecord::Schema.define(version: 2021_10_08_114848) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "allowlisted_jwts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "jti", null: false
-    t.datetime "exp", null: false
-    t.string "aud", default: "UNKNOWN"
-    t.string "remote_ip"
-    t.string "os_data"
-    t.string "browser_data"
-    t.string "device_data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["jti"], name: "index_allowlisted_jwts_on_jti", unique: true
-    t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
-  end
-
   create_table "exhibitions", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -75,16 +60,6 @@ ActiveRecord::Schema.define(version: 2021_10_08_114848) do
     t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
     t.index ["title"], name: "index_exhibitions_on_title", unique: true
     t.index ["user_id"], name: "index_exhibitions_on_user_id"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "image"
-    t.integer "priority"
-    t.string "imageable_type"
-    t.bigint "imageable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
   end
 
   create_table "painters", force: :cascade do |t|
@@ -136,7 +111,6 @@ ActiveRecord::Schema.define(version: 2021_10_08_114848) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
   add_foreign_key "exhibitions", "painters"
   add_foreign_key "exhibitions", "users"
   add_foreign_key "paintings", "painters"

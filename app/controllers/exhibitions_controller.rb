@@ -1,5 +1,5 @@
 class ExhibitionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorized#, except: [:index, :show]
   before_action :set_painter
   before_action :set_exhibition, except: [:new, :create, :index]
 

@@ -30,7 +30,7 @@ Things you may want to cover:
 ### Solving Authentication Devise-JWT, AllowList
 - Devise-JWT https://medium.com/ruby-daily/a-devise-jwt-tutorial-for-authenticating-users-in-ruby-on-rails-ca214898318e
 - More JWT https://medium.com/@brentkearney/json-web-token-jwt-and-html-logins-with-devise-and-ruby-on-rails-5-9d5e8195193d
-- https://www.programmingtil.com/contents/setting-up-jwts-in-ruby-on-rails-with-devise-jwt
+- Implemented: https://www.programmingtil.com/contents/setting-up-jwts-in-ruby-on-rails-with-devise-jwt
 - https://github.com/davidwparker/programmingtil-rails/tree/ep3
 
 ### Disable registerable in users to only allow invitations
