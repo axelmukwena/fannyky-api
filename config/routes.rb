@@ -12,7 +12,8 @@ Rails.application.routes.draw do
                  registrations: 'users/registrations'
                }
 
-    get '/painters/', to: 'painters#index', as: 'painters'
+    get '/authorize', to: 'application#authorize'
+    get '/painters', to: 'painters#index'
 
     resources :painters, path: '' do
       resources :paintings

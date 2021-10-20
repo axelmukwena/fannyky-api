@@ -6,9 +6,9 @@ class Users::SessionsController < Devise::SessionsController
   def respond_with(resource, _opts = {})
     if resource.id?
       token = issue_token(resource)
-      render json: { success: true, user: resource, token: token }, status: :ok
+      render json: { success: true, user: resource, token: token, message: "Login successful." }
     else
-      render json: { success: false, message: "Could not log in." }, status: :unauthorized
+      render json: { success: false, message: "Login failed." }
     end
   end
 
