@@ -62,3 +62,6 @@ Things you may want to cover:
 
 ### Consider UUIDs in the future
 - https://pawelurbanek.com/uuid-order-rails
+
+### Categories
+- https://blog.skcript.com/implementing-categories-in-ruby-on-rails-14c2b5e77b34

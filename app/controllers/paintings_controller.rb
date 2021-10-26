@@ -51,9 +51,8 @@ class PaintingsController < ApplicationController
   end
 
   def painting_params
-    params.require(:painting).permit(:title, :description,
-                                     :date_created, painter: @painter,
-                                     user: current_user, images: [])
+    params.require(:painting).permit(:title, :description, :category_id, :date_created,
+                                     painter: @painter, user: current_user, images: [])
   end
 
   def set_painting
