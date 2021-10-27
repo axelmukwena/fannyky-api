@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :paintings
   has_many :painters
   has_many :exhibitions
+  has_many :books
 
   validates :email, uniqueness: { case_sensitive: false }
 end

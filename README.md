@@ -64,4 +64,5 @@ Things you may want to cover:
 - https://pawelurbanek.com/uuid-order-rails
 
 ### Categories
-- https://blog.skcript.com/implementing-categories-in-ruby-on-rails-14c2b5e77b34
+- https://www.youtube.com/watch?v=MKtT1TUm7UA&ab_channel=CodeCampBase
+- https://github.com/Prometheus88/RailsBlogWithCategories/blob/master/app/controllers/blogs_controller.rb
