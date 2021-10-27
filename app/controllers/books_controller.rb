@@ -19,7 +19,7 @@ class BooksController < ApplicationController
 
   def index
     @books = @painter.books
-    @books.order(date_created: :desc).page params[:page]
+    @books.order(created_at: :desc).page params[:page]
     render json: @books
   end
 

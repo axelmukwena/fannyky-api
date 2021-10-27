@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :books
   resources :categories
   scope :api do
     devise_for :users,
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
     resources :painters, path: '' do
       resources :paintings
       resources :exhibitions
+      resources :books
     end
 
   end
