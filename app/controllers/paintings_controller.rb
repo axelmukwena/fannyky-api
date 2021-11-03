@@ -8,12 +8,13 @@ class PaintingsController < ApplicationController
   end
 
   def create
-    @painting = @painter.paintings.build(painting_params)
+    @painting = current_user.paintings.build(painting_params)
+    @painting.painter = @painter
 
     if @painting.save
       render json: { message: 'Painting created.' }, status: :ok
     else
-      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painting.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -32,7 +33,7 @@ class PaintingsController < ApplicationController
       @painting.update(painting_params)
       render json: { message: 'Painting updated.' }, status: :ok
     else
-      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painting.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -40,7 +41,7 @@ class PaintingsController < ApplicationController
     if @painting.destroy
       render json: { message: 'Painting deleted.' }, status: :ok
     else
-      render json: { message: @painting.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painting.errors.full_messages }, status: :bad_request
     end
   end
 

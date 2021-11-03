@@ -1,4 +1,5 @@
 class PaintersController < ApplicationController
+  attr_reader :painter
   before_action :authorized, except: [:index, :show]
   before_action :set_painter, except: [:new, :create, :index]
 
@@ -12,7 +13,7 @@ class PaintersController < ApplicationController
     if @painter.save
       render json: { message: 'Painter created.' }, status: :ok
     else
-      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painter.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -30,7 +31,7 @@ class PaintersController < ApplicationController
       @painter.update(painter_params)
       render json: { message: 'Painter updated.' }, status: :ok
     else
-      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painter.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -38,7 +39,7 @@ class PaintersController < ApplicationController
     if @painter.destroy
       render json: { message: 'Painter deleted.' }, status: :ok
     else
-      render json: { message: @painter.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @painter.errors.full_messages }, status: :bad_request
     end
   end
 

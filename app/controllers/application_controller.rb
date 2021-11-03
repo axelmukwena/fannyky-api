@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::API
 
+  # ----------- Explorer -----------
+
+  def increment
+
+  end
+
+  # ----------- Authorization -----------
+
   def issue_token(user)
     JWT.encode({user_id: user.id}, jwt_key, "HS256")
   end

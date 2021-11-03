@@ -13,7 +13,7 @@ class BooksController < ApplicationController
     if @book.save
       render json: { message: 'Book created.' }, status: :ok
     else
-      render json: { message: @book.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @book.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -32,7 +32,7 @@ class BooksController < ApplicationController
       @book.update(book_params)
       render json: { message: 'Book updated.' }, status: :ok
     else
-      render json: { message: @book.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @book.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -40,7 +40,7 @@ class BooksController < ApplicationController
     if @book.destroy
       render json: { message: 'Book deleted.' }, status: :ok
     else
-      render json: { message: @book.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @book.errors.full_messages }, status: :bad_request
     end
   end
 

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :categories
   scope :api do
+    resources :categories
+    resources :explorer
     devise_for :users,
                path: '',
                path_names: {

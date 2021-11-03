@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_115834) do
+ActiveRecord::Schema.define(version: 2021_11_02_213747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_115834) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "explorer"
     t.index ["painter_id"], name: "index_books_on_painter_id"
     t.index ["title"], name: "index_books_on_title", unique: true
     t.index ["user_id"], name: "index_books_on_user_id"
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_115834) do
     t.integer "when"
     t.date "start_date"
     t.date "end_date"
+    t.datetime "explorer"
     t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
     t.index ["title"], name: "index_exhibitions_on_title", unique: true
     t.index ["user_id"], name: "index_exhibitions_on_user_id"
@@ -99,6 +101,9 @@ ActiveRecord::Schema.define(version: 2021_10_27_115834) do
     t.bigint "user_id", null: false
     t.string "slug"
     t.integer "images_count"
+    t.integer "paintings_count", default: 0, null: false
+    t.integer "exhibitions_count", default: 0, null: false
+    t.integer "books_count", default: 0, null: false
     t.index ["name"], name: "index_painters_on_name", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
@@ -115,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_115834) do
     t.integer "images_count"
     t.date "date_created"
     t.integer "category_id"
+    t.datetime "explorer"
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["slug"], name: "index_paintings_on_slug", unique: true
     t.index ["title"], name: "index_paintings_on_title", unique: true

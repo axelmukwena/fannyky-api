@@ -1,5 +1,5 @@
 class ExhibitionsController < ApplicationController
-  before_action :authorized#, except: [:index, :show]
+  before_action :authorized, except: [:index, :show]
   before_action :set_painter
   before_action :set_exhibition, except: [:new, :create, :index]
 
@@ -13,13 +13,13 @@ class ExhibitionsController < ApplicationController
     if @exhibition.save
       render json: { message: 'Exhibition created.' }, status: :ok
     else
-      render json: { message: @exhibition.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
     end
   end
 
   def index
-    @exhibitions = @painter.exhibitions.
-      order(start_date: :desc).page params[:page]
+    @exhibitions = @painter.exhibitions
+    @exhibitions.order(start_date: :desc).page params[:page]
     render json: @exhibitions
   end
 
@@ -32,7 +32,7 @@ class ExhibitionsController < ApplicationController
       @exhibition.update(exhibition_params)
       render json: { message: 'Exhibition updated.' }, status: :ok
     else
-      render json: { message: @exhibition.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -40,7 +40,7 @@ class ExhibitionsController < ApplicationController
     if @exhibition.destroy
       render json: { message: 'Exhibition deleted.' }, status: :ok
     else
-      render json: { message: @exhibition.errors.full_messages[0] }, status: :bad_request
+      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
     end
   end
 

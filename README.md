@@ -35,6 +35,16 @@ Things you may want to cover:
 
 - Devise-JWT, AllowList
   - Devise-JWT https://medium.com/ruby-daily/a-devise-jwt-tutorial-for-authenticating-users-in-ruby-on-rails-ca214898318e
+
+        # Create User    
+        $ curl -XPOST -H "Content-Type: application/json" -d '{  "user": {"email": "food@example.com", "password": "12345678"}  }' http://localhost:3000/api/
+        
+        # Login
+        $ curl -XPOST -i -H "Content-Type: application/json" -d '{ "user": { "email": "food@example.com", "password": "12345678" } }' http://localhost:3000/api/login
+  
+        # Create painting
+        $ curl -XPOST -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MX0.-vW-y1bSKvwBZu_3nuusIOITy7tpKm67KF7x5C4CfXQ" -H "Content-Type: application/json" '{ "painting": {title: "Johny goes fishing", user_id: 48, painter_id: 2} }' http://localhost:3000/api/axel-mukwena/paintings/
+  
   - More JWT https://medium.com/@brentkearney/json-web-token-jwt-and-html-logins-with-devise-and-ruby-on-rails-5-9d5e8195193d
   - Implemented: https://www.programmingtil.com/contents/setting-up-jwts-in-ruby-on-rails-with-devise-jwt
   - https://github.com/davidwparker/programmingtil-rails/tree/ep3
@@ -53,7 +63,7 @@ Things you may want to cover:
 
  After editing, then:
  `ctrl+x`, then `y`, then `enter` to close and save if you’re using the nano editor.
- 
+
 ### Processing images with ActiveStorage
  - https://www.microverse.org/blog/how-to-build-an-image-upload-feature-with-rails-and-active-storage
 
