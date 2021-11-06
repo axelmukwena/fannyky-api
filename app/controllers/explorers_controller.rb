@@ -1,4 +1,4 @@
-class ExplorerController < ApplicationController
+class ExplorersController < ApplicationController
   def index
     @exh = Exhibition.where.not(explorer: nil)
     @pts = Painting.where.not(explorer: nil)
