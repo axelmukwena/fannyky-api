@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_172615) do
+ActiveRecord::Schema.define(version: 2021_11_20_190639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_172615) do
     t.integer "paintings_count", default: 0, null: false
     t.integer "exhibitions_count", default: 0, null: false
     t.integer "books_count", default: 0, null: false
+    t.integer "talks_count", default: 0, null: false
     t.index ["name"], name: "index_painters_on_name", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
@@ -127,6 +128,24 @@ ActiveRecord::Schema.define(version: 2021_11_20_172615) do
     t.index ["user_id"], name: "index_paintings_on_user_id"
   end
 
+  create_table "talks", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "date"
+    t.string "organizer"
+    t.string "location"
+    t.string "link"
+    t.integer "images_count"
+    t.string "slug"
+    t.bigint "painter_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["painter_id"], name: "index_talks_on_painter_id"
+    t.index ["title"], name: "index_talks_on_title", unique: true
+    t.index ["user_id"], name: "index_talks_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -148,4 +167,6 @@ ActiveRecord::Schema.define(version: 2021_11_20_172615) do
   add_foreign_key "exhibitions", "users"
   add_foreign_key "paintings", "painters"
   add_foreign_key "paintings", "users"
+  add_foreign_key "talks", "painters"
+  add_foreign_key "talks", "users"
 end
