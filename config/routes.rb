@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :exhibitions
       resources :books
       resources :talks
+      resources :awards
     end
 
   end

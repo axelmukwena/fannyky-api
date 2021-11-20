@@ -1,0 +1,7 @@
+class AwardSerializer < ActiveModel::Serializer
+  attributes :id, :title, :description, :year,
+             :organizer, :images_count, :slug, :created_at,
+             :painter, :user
+  has_one :painter
+  has_one :user
+end

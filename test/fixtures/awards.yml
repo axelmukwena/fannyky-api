@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  year: 1
+  organizer: MyString
+  images_count: 1
+  slug: MyString
+  painter: one
+  user: one
+
+two:
+  title: MyString
+  description: MyText
+  year: 1
+  organizer: MyString
+  images_count: 1
+  slug: MyString
+  painter: two
+  user: two
