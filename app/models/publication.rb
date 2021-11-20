@@ -1,5 +1,5 @@
-class Award < ApplicationRecord
-  belongs_to :painter, counter_cache: :awards_count
+class Publication < ApplicationRecord
+  belongs_to :painter, counter_cache: :publications_count
   belongs_to :user
   has_many_attached :images
   paginates_per 50

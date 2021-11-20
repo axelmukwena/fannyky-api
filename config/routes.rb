@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :publications
   scope :api do
     resources :categories
       devise_for :users,

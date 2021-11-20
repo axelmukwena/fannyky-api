@@ -52,7 +52,7 @@ class AwardsController < ApplicationController
   end
 
   def award_params
-    params.require(:talk).permit(:title, :description, :year,
+    params.require(:award).permit(:title, :description, :year,
                                  :organizer, painter: @painter,
                                  user: current_user, images: [])
   end

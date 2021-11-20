@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_190639) do
+ActiveRecord::Schema.define(version: 2021_11_20_192824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,22 @@ ActiveRecord::Schema.define(version: 2021_11_20_190639) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "awards", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "year"
+    t.string "organizer"
+    t.integer "images_count"
+    t.string "slug"
+    t.bigint "painter_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["painter_id"], name: "index_awards_on_painter_id"
+    t.index ["title"], name: "index_awards_on_title", unique: true
+    t.index ["user_id"], name: "index_awards_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -104,6 +120,8 @@ ActiveRecord::Schema.define(version: 2021_11_20_190639) do
     t.integer "exhibitions_count", default: 0, null: false
     t.integer "books_count", default: 0, null: false
     t.integer "talks_count", default: 0, null: false
+    t.integer "awards_count", default: 0, null: false
+    t.integer "publications_count", default: 0, null: false
     t.index ["name"], name: "index_painters_on_name", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
@@ -126,6 +144,23 @@ ActiveRecord::Schema.define(version: 2021_11_20_190639) do
     t.index ["slug"], name: "index_paintings_on_slug", unique: true
     t.index ["title"], name: "index_paintings_on_title", unique: true
     t.index ["user_id"], name: "index_paintings_on_user_id"
+  end
+
+  create_table "publications", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "year"
+    t.string "organization"
+    t.string "location"
+    t.integer "images_count"
+    t.string "slug"
+    t.bigint "painter_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["painter_id"], name: "index_publications_on_painter_id"
+    t.index ["title"], name: "index_publications_on_title", unique: true
+    t.index ["user_id"], name: "index_publications_on_user_id"
   end
 
   create_table "talks", force: :cascade do |t|
@@ -161,12 +196,16 @@ ActiveRecord::Schema.define(version: 2021_11_20_190639) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "awards", "painters"
+  add_foreign_key "awards", "users"
   add_foreign_key "books", "painters"
   add_foreign_key "books", "users"
   add_foreign_key "exhibitions", "painters"
   add_foreign_key "exhibitions", "users"
   add_foreign_key "paintings", "painters"
   add_foreign_key "paintings", "users"
+  add_foreign_key "publications", "painters"
+  add_foreign_key "publications", "users"
   add_foreign_key "talks", "painters"
   add_foreign_key "talks", "users"
 end

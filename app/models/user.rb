@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :books
   has_many :talks
   has_many :awards
+  has_many :publications
 
   validates :email, uniqueness: { case_sensitive: false }
 end
