@@ -1,6 +1,6 @@
 class PaintingSerializer < ActiveModel::Serializer
   attributes :id, :slug, :title, :abstract, :dimension, :description,
-             :created_at, :images_count, :date_created, :category, :explorer,
+             :created_at, :images_count, :date_created, :category,
              :painter, :user
 
   belongs_to :user
