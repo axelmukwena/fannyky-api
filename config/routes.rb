@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :publications
   scope :api do
     resources :categories
       devise_for :users,
@@ -20,9 +19,9 @@ Rails.application.routes.draw do
     resources :painters, path: '' do
       resources :paintings
       resources :exhibitions
-      resources :books
       resources :talks
       resources :awards
+      resources :publications
     end
 
   end

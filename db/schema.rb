@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_192824) do
+ActiveRecord::Schema.define(version: 2021_11_20_194928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(version: 2021_11_20_192824) do
     t.integer "images_count"
     t.integer "paintings_count", default: 0, null: false
     t.integer "exhibitions_count", default: 0, null: false
-    t.integer "books_count", default: 0, null: false
     t.integer "talks_count", default: 0, null: false
     t.integer "awards_count", default: 0, null: false
     t.integer "publications_count", default: 0, null: false
