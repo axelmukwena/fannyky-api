@@ -3,6 +3,7 @@ class Painter < ApplicationRecord
   has_many :paintings
   has_many :exhibitions
   has_many :books
+  has_many :talks
   has_many_attached :images
   paginates_per 50
 

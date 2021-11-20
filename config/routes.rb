@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :paintings
       resources :exhibitions
       resources :books
+      resources :talks
     end
 
   end
