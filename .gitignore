@@ -28,3 +28,4 @@
 
 db/paintings/*
 *.DS_Store
+.env

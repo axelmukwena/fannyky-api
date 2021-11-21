@@ -1,11 +1,5 @@
 class ApplicationController < ActionController::API
 
-  # ----------- Explorer -----------
-
-  def increment
-
-  end
-
   # ----------- Authorization -----------
 
   def issue_token(user)
@@ -39,7 +33,7 @@ class ApplicationController < ActionController::API
   private
 
   def jwt_key
-    Rails.application.credentials.devise[:jwt_secret_key]
+    ENV[:JWT_SECRET_KEY]
   end
 
   def decoded_token
