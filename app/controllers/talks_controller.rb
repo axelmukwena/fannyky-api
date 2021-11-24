@@ -12,9 +12,9 @@ class TalksController < ApplicationController
     @talk.painter = @painter
 
     if @talk.save
-      render json: { message: 'Talk created.' }, status: :ok
+      render json: { success: true, talk: @talk, message: 'Talk created.' }
     else
-      render json: { message: @talk.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @talk.errors.full_messages }
     end
   end
 
@@ -31,17 +31,27 @@ class TalksController < ApplicationController
   def update
     if @talk.valid?
       @talk.update(talk_params)
-      render json: { message: 'Talk updated.' }, status: :ok
+      render json: { success: true, talk: @talk, message: 'Talk updated.' }
     else
-      render json: { message: @talk.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @talk.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @talk.destroy
-      render json: { message: 'Talk deleted.' }, status: :ok
+      render json: { success: true, message: 'Talk deleted.' }
     else
-      render json: { message: @talk.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @talk.errors.full_messages }
     end
   end
 
@@ -54,7 +64,7 @@ class TalksController < ApplicationController
   def talk_params
     params.require(:talk).permit(:title, :description, :date,
                                  :organizer, :location, :link, painter: @painter,
-                                 user: current_user, images: [])
+                                 user: current_user)
   end
 
   def set_talk

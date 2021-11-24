@@ -12,9 +12,9 @@ class AwardsController < ApplicationController
     @award.painter = @painter
 
     if @award.save
-      render json: { message: 'Award created.' }, status: :ok
+      render json: { success: true, award: @award, message: 'Award created.' }
     else
-      render json: { message: @award.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @award.errors.full_messages }
     end
   end
 
@@ -31,17 +31,27 @@ class AwardsController < ApplicationController
   def update
     if @award.valid?
       @award.update(award_params)
-      render json: { message: 'Award updated.' }, status: :ok
+      render json: { success: true, award: @award, message: 'Award updated.' }
     else
-      render json: { message: @award.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @award.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @award.destroy
-      render json: { message: 'Award deleted.' }, status: :ok
+      render json: { success: true, message: 'Award deleted.' }
     else
-      render json: { message: @award.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @award.errors.full_messages }
     end
   end
 

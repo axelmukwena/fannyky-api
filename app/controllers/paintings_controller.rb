@@ -12,9 +12,9 @@ class PaintingsController < ApplicationController
     @painting.painter = @painter
 
     if @painting.save
-      render json: { message: 'Painting created.' }, status: :ok
+      render json: { success: true, painting: @painting, message: 'Painting created.' }
     else
-      render json: { message: @painting.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painting.errors.full_messages }
     end
   end
 
@@ -31,17 +31,27 @@ class PaintingsController < ApplicationController
   def update
     if @painting.valid?
       @painting.update(painting_params)
-      render json: { message: 'Painting updated.' }, status: :ok
+      render json: { success: true, painting: @painting, message: 'Painting updated.' }
     else
-      render json: { message: @painting.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painting.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @painting.destroy
-      render json: { message: 'Painting deleted.' }, status: :ok
+      render json: { success: true, message: 'Painting deleted.' }
     else
-      render json: { message: @painting.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painting.errors.full_messages }
     end
   end
 
@@ -52,9 +62,9 @@ class PaintingsController < ApplicationController
   end
 
   def painting_params
-    params.require(:painting).permit(:title, :description, :category_id, :date_created,
-                                     :abstract, :dimension, painter: @painter,
-                                     user: current_user, images: [])
+    params.require(:painting).permit(:title, :description, :date_created,
+                                     :abstract, :dimension, :painter_id,
+                                     user: current_user)
   end
 
   def set_painting

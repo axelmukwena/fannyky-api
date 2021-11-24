@@ -11,9 +11,9 @@ class PaintersController < ApplicationController
     @painter = current_user.painters.build(painter_params)
 
     if @painter.save
-      render json: { message: 'Painter created.' }, status: :ok
+      render json: { success: true, painter: @painter, message: 'Painter created.' }
     else
-      render json: { message: @painter.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painter.errors.full_messages }
     end
   end
 
@@ -29,17 +29,27 @@ class PaintersController < ApplicationController
   def update
     if @painter.valid?
       @painter.update(painter_params)
-      render json: { message: 'Painter updated.' }, status: :ok
+      render json: { success: true, painter: @painter, message: 'Painter updated.' }
     else
-      render json: { message: @painter.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painter.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @painter.destroy
-      render json: { message: 'Painter deleted.' }, status: :ok
+      render json: { success: true, message: 'Painter deleted.' }
     else
-      render json: { message: @painter.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @painter.errors.full_messages }
     end
   end
 

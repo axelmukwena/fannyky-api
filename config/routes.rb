@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get '/painters', to: 'painters#index'
 
     resources :painters, path: '' do
-      resources :paintings
+      resources :paintings do
+        post 'images', to: 'paintings#create_images'
+      end
       resources :exhibitions
       resources :talks
       resources :awards

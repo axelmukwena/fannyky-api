@@ -12,9 +12,9 @@ class PublicationsController < ApplicationController
     @publication.painter = @painter
 
     if @publication.save
-      render json: { message: 'Publication created.' }, status: :ok
+      render json: { success: true, publication: @publication, message: 'Publication created.' }
     else
-      render json: { message: @publication.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @publication.errors.full_messages }
     end
   end
 
@@ -31,17 +31,27 @@ class PublicationsController < ApplicationController
   def update
     if @publication.valid?
       @publication.update(publication_params)
-      render json: { message: 'Publication updated.' }, status: :ok
+      render json: { success: true, publication: @publication, message: 'Publication updated.' }
     else
-      render json: { message: @publication.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @publication.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @publication.destroy
-      render json: { message: 'Publication deleted.' }, status: :ok
+      render json: { success: true, message: 'Publication deleted.' }
     else
-      render json: { message: @publication.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @publication.errors.full_messages }
     end
   end
 

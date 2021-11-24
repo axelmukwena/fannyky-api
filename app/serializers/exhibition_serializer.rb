@@ -1,7 +1,16 @@
 class ExhibitionSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
   attributes :id, :slug, :title, :description, :link, :location,
              :created_at, :images_count, :when, :start_date, :end_date,
-             :type, :painter, :user
+             :type, :painter, :user, :images
+
+  def images
+    return unless object.images.attachments
+    object.images.map do |image|
+      URI.join(ActiveStorage::Current.host,
+               rails_blob_path(image, only_path: true))
+    end
+  end
 
   belongs_to :user
   belongs_to :painter

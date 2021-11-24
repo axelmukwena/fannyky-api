@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::API
 
+  before_action :active_storage_current_host
+
+  def active_storage_current_host
+    ActiveStorage::Current.host = request.base_url
+  end
+
   # ----------- Authorization -----------
 
   def issue_token(user)
@@ -33,7 +39,11 @@ class ApplicationController < ActionController::API
   private
 
   def jwt_key
-    ENV["JWT_SECRET_KEY"]
+    if Rails.env == "development"
+      Rails.application.credentials.devise[:jwt_secret_key]
+    else
+      ENV["JWT_SECRET_KEY"]
+    end
   end
 
   def decoded_token

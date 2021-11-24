@@ -11,9 +11,9 @@ class ExhibitionsController < ApplicationController
     @exhibition = @painter.exhibitions.build(exhibition_params)
 
     if @exhibition.save
-      render json: { message: 'Exhibition created.' }, status: :ok
+      render json: { success: true, exhibition: @exhibition, message: 'Exhibition created.' }
     else
-      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @exhibition.errors.full_messages }
     end
   end
 
@@ -30,17 +30,27 @@ class ExhibitionsController < ApplicationController
   def update
     if @exhibition.valid?
       @exhibition.update(exhibition_params)
-      render json: { message: 'Exhibition updated.' }, status: :ok
+      render json: { success: true, exhibition: @exhibition, message: 'Exhibition updated.' }
     else
-      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @exhibition.errors.full_messages }
+    end
+  end
+
+  def create_images
+    if params.has_key?(:images)
+      if @painting.images.attach(params[:images])
+        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
     end
   end
 
   def destroy
     if @exhibition.destroy
-      render json: { message: 'Exhibition deleted.' }, status: :ok
+      render json: { success: true, message: 'Exhibition deleted.' }
     else
-      render json: { message: @exhibition.errors.full_messages }, status: :bad_request
+      render json: { success: false, message: @exhibition.errors.full_messages }
     end
   end
 

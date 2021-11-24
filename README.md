@@ -76,3 +76,7 @@ Things you may want to cover:
 ### Categories
 - https://www.youtube.com/watch?v=MKtT1TUm7UA&ab_channel=CodeCampBase
 - https://github.com/Prometheus88/RailsBlogWithCategories/blob/master/app/controllers/blogs_controller.rb
+
+### View Heroku Postgres DB in browser
+- https://app.popsql.com/
+- How to: https://danielnmai.medium.com/how-to-set-up-postico-3-to-connect-to-a-remote-postgresql-server-heroku-f9704e1b7643
