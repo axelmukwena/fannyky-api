@@ -68,9 +68,7 @@ class PaintersController < ApplicationController
   private
 
   def painter_params
-    params.require(:painter).permit(:name, :about,
-                                    :email, :phone, :facebook,
-                                    :instagram, :twitter,
+    params.require(:painter).permit(:name, :about, :email, :phone, :link,
                                     user: current_user)
   end
 
