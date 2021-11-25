@@ -39,10 +39,22 @@ class AwardsController < ApplicationController
 
   def create_images
     if params.has_key?(:images)
-      if @painting.images.attach(params[:images])
-        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      if @award.images.attach(params[:images])
+        render json: { success: true, award: @award, message: 'Images Added.' }
       else
-        render json: { success: false, message: @painting.errors.full_messages }
+        render json: { success: false, message: @award.errors.full_messages }
+      end
+    end
+  end
+
+  def delete_image
+    if params.has_key?(:image_id)
+      @image = @award.images.find(params[:image_id])
+      if @image
+        @image.purge
+        render json: { success: true, award: @award, message: 'Image Deleted.' }
+      else
+        render json: { success: false, message: @award.errors.full_messages }
       end
     end
   end
@@ -58,17 +70,25 @@ class AwardsController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.friendly.find(params[:painter_id])
+    begin
+      @painter = Painter.friendly.find(params[:painter_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painter.' }
+    end
   end
 
   def award_params
     params.require(:award).permit(:title, :description, :year,
                                  :organizer, painter: @painter,
-                                 user: current_user, images: [])
+                                 user: current_user)
   end
 
   def set_award
-    @award = Award.friendly.find(params[:id])
+    begin
+      @award = Award.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find award.' }
+    end
   end
 end
 

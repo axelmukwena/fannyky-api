@@ -37,10 +37,22 @@ class PaintersController < ApplicationController
 
   def create_images
     if params.has_key?(:images)
-      if @painting.images.attach(params[:images])
-        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      if @painter.images.attach(params[:images])
+        render json: { success: true, painter: @painter, message: 'Images Added.' }
       else
-        render json: { success: false, message: @painting.errors.full_messages }
+        render json: { success: false, message: @painter.errors.full_messages }
+      end
+    end
+  end
+
+  def delete_image
+    if params.has_key?(:image_id)
+      @image = @painter.images.find(params[:image_id])
+      if @image
+        @image.purge
+        render json: { success: true, painter: @painter, message: 'Image Deleted.' }
+      else
+        render json: { success: false, message: @painter.errors.full_messages }
       end
     end
   end
@@ -55,14 +67,18 @@ class PaintersController < ApplicationController
 
   private
 
-  def set_painter
-    @painter = Painter.friendly.find(params[:id])
-  end
-
   def painter_params
     params.require(:painter).permit(:name, :about,
                                     :email, :phone, :facebook,
                                     :instagram, :twitter,
-                                    user: current_user, images: [])
+                                    user: current_user)
+  end
+
+  def set_painter
+    begin
+      @painter = Painter.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painter.' }
+    end
   end
 end

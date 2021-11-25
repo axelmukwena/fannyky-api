@@ -39,10 +39,22 @@ class TalksController < ApplicationController
 
   def create_images
     if params.has_key?(:images)
-      if @painting.images.attach(params[:images])
-        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      if @talk.images.attach(params[:images])
+        render json: { success: true, talk: @talk, message: 'Images Added.' }
       else
-        render json: { success: false, message: @painting.errors.full_messages }
+        render json: { success: false, message: @talk.errors.full_messages }
+      end
+    end
+  end
+
+  def delete_image
+    if params.has_key?(:image_id)
+      @image = @talk.images.find(params[:image_id])
+      if @image
+        @image.purge
+        render json: { success: true, talk: @talk, message: 'Image Deleted.' }
+      else
+        render json: { success: false, message: @talk.errors.full_messages }
       end
     end
   end
@@ -58,7 +70,11 @@ class TalksController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.friendly.find(params[:painter_id])
+    begin
+      @painter = Painter.friendly.find(params[:painter_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painter.' }
+    end
   end
 
   def talk_params
@@ -68,6 +84,10 @@ class TalksController < ApplicationController
   end
 
   def set_talk
-    @talk = Talk.friendly.find(params[:id])
+    begin
+      @talk = Talk.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find talk.' }
+    end
   end
 end

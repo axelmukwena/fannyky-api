@@ -70,7 +70,11 @@ class PaintingsController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.friendly.find(params[:painter_id])
+    begin
+      @painter = Painter.friendly.find(params[:painter_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painter.' }
+    end
   end
 
   def painting_params
@@ -79,7 +83,12 @@ class PaintingsController < ApplicationController
                                      user: current_user)
   end
 
+  # Friendly ID does not return Nil when record is not found
   def set_painting
-    @painting = Painting.friendly.find(params[:id])
+    begin
+      @painting = Painting.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painting.' }
+    end
   end
 end

@@ -38,10 +38,22 @@ class ExhibitionsController < ApplicationController
 
   def create_images
     if params.has_key?(:images)
-      if @painting.images.attach(params[:images])
-        render json: { success: true, painting: @painting, message: 'Images Added.' }
+      if @exhibition.images.attach(params[:images])
+        render json: { success: true, exhibition: @exhibition, message: 'Images Added.' }
       else
-        render json: { success: false, message: @painting.errors.full_messages }
+        render json: { success: false, message: @exhibition.errors.full_messages }
+      end
+    end
+  end
+
+  def delete_image
+    if params.has_key?(:image_id)
+      @image = @exhibition.images.find(params[:image_id])
+      if @image
+        @image.purge
+        render json: { success: true, exhibition: @exhibition, message: 'Image Deleted.' }
+      else
+        render json: { success: false, message: @exhibition.errors.full_messages }
       end
     end
   end
@@ -57,17 +69,25 @@ class ExhibitionsController < ApplicationController
   private
 
   def set_painter
-    @painter = Painter.friendly.find(params[:painter_id])
+    begin
+      @painter = Painter.friendly.find(params[:painter_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find painter.' }
+    end
   end
 
   def exhibition_params
     params.require(:exhibition).permit(:title, :description,
                                        :start_date, :end_date, :link,
                                        :location, :type, painter: @painter,
-                                       user: current_user, images: [])
+                                       user: current_user)
   end
 
   def set_exhibition
-    @exhibition = Exhibition.friendly.find(params[:id])
+    begin
+      @exhibition = Exhibition.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { record: false, message: 'Could not find exhibition.' }
+    end
   end
 end
