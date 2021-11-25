@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :awards
   has_many :publications
 
-  validates :email, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 end

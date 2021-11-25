@@ -47,6 +47,18 @@ class PaintingsController < ApplicationController
     end
   end
 
+  def delete_image
+    if params.has_key?(:image_id)
+      @image = @painting.images.find(params[:image_id])
+      if @image
+        @image.purge
+        render json: { success: true, painting: @painting, message: 'Image Deleted.' }
+      else
+        render json: { success: false, message: @painting.errors.full_messages }
+      end
+    end
+  end
+
   def destroy
     if @painting.destroy
       render json: { success: true, message: 'Painting deleted.' }
