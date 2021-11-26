@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_183314) do
+ActiveRecord::Schema.define(version: 2021_11_26_071936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.text "description"
     t.integer "year"
     t.string "organizer"
-    t.integer "images_count"
     t.string "slug"
     t.bigint "painter_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_awards_on_page_link", unique: true
     t.index ["painter_id"], name: "index_awards_on_painter_id"
-    t.index ["title"], name: "index_awards_on_title", unique: true
     t.index ["user_id"], name: "index_awards_on_user_id"
   end
 
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.string "link"
     t.string "location"
     t.string "slug"
-    t.integer "images_count"
     t.bigint "painter_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -82,8 +81,9 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.date "start_date"
     t.date "end_date"
     t.string "type"
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_exhibitions_on_page_link", unique: true
     t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
-    t.index ["title"], name: "index_exhibitions_on_title", unique: true
     t.index ["user_id"], name: "index_exhibitions_on_user_id"
   end
 
@@ -96,14 +96,14 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.string "slug"
-    t.integer "images_count"
     t.integer "paintings_count", default: 0, null: false
     t.integer "exhibitions_count", default: 0, null: false
     t.integer "talks_count", default: 0, null: false
     t.integer "awards_count", default: 0, null: false
     t.integer "publications_count", default: 0, null: false
     t.string "link"
-    t.index ["name"], name: "index_painters_on_name", unique: true
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_painters_on_page_link", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
   end
@@ -116,14 +116,14 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "painter_id", null: false
     t.string "slug"
-    t.integer "images_count"
     t.date "date_created"
     t.integer "category_id"
     t.string "abstract"
     t.string "dimension"
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_paintings_on_page_link", unique: true
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["slug"], name: "index_paintings_on_slug", unique: true
-    t.index ["title"], name: "index_paintings_on_title", unique: true
     t.index ["user_id"], name: "index_paintings_on_user_id"
   end
 
@@ -133,15 +133,15 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.integer "year"
     t.string "organization"
     t.string "location"
-    t.integer "images_count"
     t.string "slug"
     t.bigint "painter_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "link"
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_publications_on_page_link", unique: true
     t.index ["painter_id"], name: "index_publications_on_painter_id"
-    t.index ["title"], name: "index_publications_on_title", unique: true
     t.index ["user_id"], name: "index_publications_on_user_id"
   end
 
@@ -152,14 +152,14 @@ ActiveRecord::Schema.define(version: 2021_11_25_183314) do
     t.string "organizer"
     t.string "location"
     t.string "link"
-    t.integer "images_count"
     t.string "slug"
     t.bigint "painter_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "page_link", null: false
+    t.index ["page_link"], name: "index_talks_on_page_link", unique: true
     t.index ["painter_id"], name: "index_talks_on_painter_id"
-    t.index ["title"], name: "index_talks_on_title", unique: true
     t.index ["user_id"], name: "index_talks_on_user_id"
   end
 

@@ -1,8 +1,9 @@
 class ExhibitionSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :slug, :title, :description, :link, :location,
-             :created_at, :images_count, :when, :start_date, :end_date,
-             :type, :painter, :user, :images
+  attributes :id, :slug, :title, :description, :link,
+             :location, :created_at, :when, :start_date,
+             :end_date, :page_link, :type, :painter,
+             :user, :images
 
   def images
     return unless object.images.attachments

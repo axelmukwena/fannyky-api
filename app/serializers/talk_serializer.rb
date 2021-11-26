@@ -1,7 +1,7 @@
 class TalkSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :title, :description, :date,
-             :organizer, :location, :link, :images_count,
+             :organizer, :location, :link, :page_link,
              :created_at, :slug, :painter, :user, :images
 
   def images

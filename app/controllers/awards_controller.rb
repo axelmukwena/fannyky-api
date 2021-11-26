@@ -20,7 +20,7 @@ class AwardsController < ApplicationController
 
   def index
     @awards = @painter.awards
-    @awards.order(date_created: :desc).page params[:page]
+    @awards.order(year: :desc).page params[:page]
     render json: @awards
   end
 
@@ -78,7 +78,7 @@ class AwardsController < ApplicationController
   end
 
   def award_params
-    params.require(:award).permit(:title, :description, :year,
+    params.require(:award).permit(:title, :page_link, :description, :year,
                                  :organizer, painter: @painter,
                                  user: current_user)
   end

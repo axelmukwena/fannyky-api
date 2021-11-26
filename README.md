@@ -80,3 +80,8 @@ Things you may want to cover:
 ### View Heroku Postgres DB in browser
 - https://app.popsql.com/
 - How to: https://danielnmai.medium.com/how-to-set-up-postico-3-to-connect-to-a-remote-postgresql-server-heroku-f9704e1b7643
+
+### Rake
+      
+    $ rake db:drop && rake db:create && rake db:migrate
+    $ heroku pg:reset

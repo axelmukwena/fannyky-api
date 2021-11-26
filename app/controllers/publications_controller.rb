@@ -20,7 +20,7 @@ class PublicationsController < ApplicationController
 
   def index
     @publications = @painter.publications
-    @publications.order(date_created: :desc).page params[:page]
+    @publications.order(year: :desc).page params[:page]
     render json: @publications
   end
 
@@ -78,7 +78,7 @@ class PublicationsController < ApplicationController
   end
 
   def publication_params
-    params.require(:talk).permit(:title, :description, :year,
+    params.require(:talk).permit(:title, :page_link, :description, :year,
                                  :organization, :location, painter: @painter,
                                  user: current_user)
   end
