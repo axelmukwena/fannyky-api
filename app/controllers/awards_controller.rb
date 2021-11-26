@@ -78,9 +78,8 @@ class AwardsController < ApplicationController
   end
 
   def award_params
-    params.require(:award).permit(:prize, :pagelink, :description, :year,
-                                 :organizer, painter: @painter,
-                                 user: current_user)
+    params.require(:award).permit(:prize, :pagelink, :description,
+                                  :year, painter: @painter, user: current_user)
   end
 
   def set_award

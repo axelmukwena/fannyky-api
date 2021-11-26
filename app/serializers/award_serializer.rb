@@ -1,8 +1,8 @@
 class AwardSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :prize, :description, :year,
-             :organizer, :slug, :created_at,
-             :pagelink, :painter, :user, :images
+             :slug, :created_at, :pagelink,
+             :painter, :user, :images
 
   def images
     return unless object.images.attachments
