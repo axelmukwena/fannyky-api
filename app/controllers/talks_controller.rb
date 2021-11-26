@@ -78,7 +78,7 @@ class TalksController < ApplicationController
   end
 
   def talk_params
-    params.require(:talk).permit(:title, :page_link, :description, :date,
+    params.require(:talk).permit(:title, :pagelink, :description, :date,
                                  :organizer, :location, :link, painter: @painter,
                                  user: current_user)
   end

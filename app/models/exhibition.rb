@@ -5,11 +5,11 @@ class Exhibition < ApplicationRecord
   paginates_per 50
 
   extend FriendlyId
-  friendly_id :page_link, use: :slugged
+  friendly_id :pagelink, use: :slugged
 
   def should_generate_new_friendly_id?
-    page_link_changed?
+    pagelink_changed?
   end
 
-  validates :page_link, presence: true, uniqueness: true
+  validates :pagelink, presence: true, uniqueness: true
 end

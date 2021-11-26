@@ -6,12 +6,11 @@ class Painting < ApplicationRecord
   paginates_per 20
 
   extend FriendlyId
-  friendly_id :page_link, use: :slugged
+  friendly_id :pagelink, use: :slugged
 
-  # https://stackoverflow.com/a/38449957/8050183
   def should_generate_new_friendly_id?
-    page_link_changed?
+    pagelink_changed?
   end
 
-  validates :page_link, presence: true, uniqueness: true
+  validates :pagelink, presence: true, uniqueness: true
 end

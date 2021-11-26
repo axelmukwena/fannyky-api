@@ -1,7 +1,7 @@
 class PublicationSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :title, :description, :year,
-             :organization, :location, :page_link,
+             :organization, :location, :pagelink,
              :slug, :created_at, :painter, :user, :images
 
   def images

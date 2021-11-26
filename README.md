@@ -85,3 +85,6 @@ Things you may want to cover:
       
     $ rake db:drop && rake db:create && rake db:migrate
     $ heroku pg:reset
+
+### Generate new slug on slugged change
+- https://stackoverflow.com/a/38449957/8050183

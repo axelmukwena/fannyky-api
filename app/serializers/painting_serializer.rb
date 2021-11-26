@@ -3,7 +3,7 @@ class PaintingSerializer < ActiveModel::Serializer
   attributes :id, :slug, :title, :abstract,
              :dimension, :description, :created_at,
              :images, :date_created, # :category,
-             :page_link, :painter, :user
+             :pagelink, :painter, :user
 
   # https://stackoverflow.com/a/50481652/8050183
   # Check application controller :active_storage_current_host

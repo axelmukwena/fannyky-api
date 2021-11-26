@@ -78,7 +78,7 @@ class PublicationsController < ApplicationController
   end
 
   def publication_params
-    params.require(:talk).permit(:title, :page_link, :description, :year,
+    params.require(:publication).permit(:title, :pagelink, :description, :year,
                                  :organization, :location, painter: @painter,
                                  user: current_user)
   end
