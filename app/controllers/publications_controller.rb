@@ -79,7 +79,7 @@ class PublicationsController < ApplicationController
 
   def publication_params
     params.require(:publication).permit(:title, :pagelink, :description, :year,
-                                 :organization, :location, painter: @painter,
+                                 :organization, :location, :link, painter: @painter,
                                  user: current_user)
   end
 

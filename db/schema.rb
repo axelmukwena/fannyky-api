@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_145937) do
+ActiveRecord::Schema.define(version: 2021_11_26_180516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_145937) do
   end
 
   create_table "awards", force: :cascade do |t|
-    t.string "title"
+    t.string "prize"
     t.text "description"
     t.integer "year"
     t.string "organizer"
