@@ -78,7 +78,7 @@ class ExhibitionsController < ApplicationController
 
   def exhibition_params
     params.require(:exhibition).permit(:title, :pagelink, :description,
-                                       :start_date, :end_date, :link,
+                                       :start_date, :end_date, :link, :organization,
                                        :location, :type, painter: @painter,
                                        user: current_user)
   end

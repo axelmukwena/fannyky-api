@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_075805) do
+ActiveRecord::Schema.define(version: 2021_11_26_132553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_075805) do
     t.date "end_date"
     t.string "type"
     t.string "pagelink", null: false
+    t.string "organization"
     t.index ["pagelink"], name: "index_exhibitions_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
     t.index ["user_id"], name: "index_exhibitions_on_user_id"

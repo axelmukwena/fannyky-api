@@ -2,7 +2,7 @@ class ExhibitionSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :slug, :title, :description, :link,
              :location, :created_at, :when, :start_date,
-             :end_date, :pagelink, :type, :painter,
+             :end_date, :pagelink, :type, :organization, :painter,
              :user, :images
 
   def images
