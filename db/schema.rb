@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_134219) do
+ActiveRecord::Schema.define(version: 2021_11_26_145937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,9 +77,9 @@ ActiveRecord::Schema.define(version: 2021_11_26_134219) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "start_date"
-    t.date "end_date"
-    t.string "type"
+    t.string "start_date"
+    t.string "end_date"
+    t.string "which"
     t.string "pagelink", null: false
     t.string "organization"
     t.index ["pagelink"], name: "index_exhibitions_on_pagelink", unique: true
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_134219) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "painter_id", null: false
     t.string "slug"
-    t.date "date_created"
+    t.string "date_created"
     t.integer "category_id"
     t.string "abstract"
     t.string "dimension"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_134219) do
   create_table "talks", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.date "date"
+    t.string "date"
     t.string "organizer"
     t.string "location"
     t.string "link"

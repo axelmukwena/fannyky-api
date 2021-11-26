@@ -8,7 +8,8 @@ class ExhibitionsController < ApplicationController
   end
 
   def create
-    @exhibition = @painter.exhibitions.build(exhibition_params)
+    @exhibition = current_user.exhibitions.build(exhibition_params)
+    @exhibition.painter = @painter
 
     if @exhibition.save
       render json: { success: true, exhibition: @exhibition, message: 'Exhibition created.' }
@@ -79,7 +80,7 @@ class ExhibitionsController < ApplicationController
   def exhibition_params
     params.require(:exhibition).permit(:title, :pagelink, :description,
                                        :start_date, :end_date, :link, :organization,
-                                       :location, :type, painter: @painter,
+                                       :location, :which, painter: @painter,
                                        user: current_user)
   end
 
