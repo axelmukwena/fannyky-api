@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_183505) do
+ActiveRecord::Schema.define(version: 2021_12_05_160329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_183505) do
     t.string "which"
     t.string "pagelink", null: false
     t.string "organization"
+    t.date "rankdate"
     t.index ["pagelink"], name: "index_exhibitions_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_exhibitions_on_painter_id"
     t.index ["user_id"], name: "index_exhibitions_on_user_id"
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_183505) do
     t.string "abstract"
     t.string "dimension"
     t.string "pagelink", null: false
+    t.date "rankdate"
     t.index ["pagelink"], name: "index_paintings_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["slug"], name: "index_paintings_on_slug", unique: true
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_183505) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "link"
     t.string "pagelink", null: false
+    t.date "rankdate"
     t.index ["pagelink"], name: "index_publications_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_publications_on_painter_id"
     t.index ["user_id"], name: "index_publications_on_user_id"
@@ -157,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_183505) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "pagelink", null: false
+    t.date "rankdate"
     t.index ["pagelink"], name: "index_talks_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_talks_on_painter_id"
     t.index ["user_id"], name: "index_talks_on_user_id"

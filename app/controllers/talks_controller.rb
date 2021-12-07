@@ -19,8 +19,8 @@ class TalksController < ApplicationController
   end
 
   def index
-    @talks = @painter.talks
-    @talks.order(date: :desc).page params[:page]
+    @talks = @painter.talks.order(rankdate: :desc)
+    @talks.page params[:page]
     render json: @talks
   end
 
@@ -79,7 +79,7 @@ class TalksController < ApplicationController
 
   def talk_params
     params.require(:talk).permit(:title, :pagelink, :description, :date,
-                                 :organizer, :location, :link, painter: @painter,
+                                 :organizer, :location, :rankdate, :link, painter: @painter,
                                  user: current_user)
   end
 

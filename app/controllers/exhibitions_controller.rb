@@ -19,8 +19,8 @@ class ExhibitionsController < ApplicationController
   end
 
   def index
-    @exhibitions = @painter.exhibitions
-    @exhibitions.order(start_date: :desc).page params[:page]
+    @exhibitions = @painter.exhibitions.order(rankdate: :desc)
+    @exhibitions.page params[:page]
     render json: @exhibitions
   end
 
@@ -78,7 +78,7 @@ class ExhibitionsController < ApplicationController
   end
 
   def exhibition_params
-    params.require(:exhibition).permit(:title, :pagelink, :description,
+    params.require(:exhibition).permit(:title, :pagelink, :rankdate, :description,
                                        :start_date, :end_date, :link, :organization,
                                        :location, :which, painter: @painter,
                                        user: current_user)

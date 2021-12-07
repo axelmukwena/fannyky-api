@@ -19,8 +19,8 @@ class AwardsController < ApplicationController
   end
 
   def index
-    @awards = @painter.awards
-    @awards.order(year: :desc).page params[:page]
+    @awards = @painter.awards.order(year: :desc)
+    @awards.page params[:page]
     render json: @awards
   end
 

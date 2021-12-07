@@ -19,8 +19,8 @@ class PaintingsController < ApplicationController
   end
 
   def index
-    @paintings = @painter.paintings
-    @paintings.order(date_created: :desc).page params[:page]
+    @paintings = @painter.paintings.order(rankdate: :desc)
+    @paintings.page params[:page]
     render json: @paintings
   end
 
@@ -79,7 +79,7 @@ class PaintingsController < ApplicationController
 
   def painting_params
     params.require(:painting).permit(:title, :pagelink, :description,
-                                     :date_created, :abstract, :dimension,
+                                     :date_created, :rankdate, :abstract, :dimension,
                                      :painter_id, user: current_user)
   end
 
