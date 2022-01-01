@@ -1,6 +1,6 @@
 # FannyKy API
 
-React-based Fannyky Front end application consuming the Ruby on Rails-based API at https://github.com/axelmukwena/fannyky-api.
+Ruby on Rails-based RESTful API serving the React-based front-end at https://github.com/axelmukwena/fannyky.
 
 ## Resources
 ### Docker
