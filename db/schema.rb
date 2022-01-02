@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_160329) do
+ActiveRecord::Schema.define(version: 2022_01_01_235901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,7 +103,9 @@ ActiveRecord::Schema.define(version: 2021_12_05_160329) do
     t.integer "publications_count", default: 0, null: false
     t.string "link"
     t.string "pagelink", null: false
+    t.integer "rank"
     t.index ["pagelink"], name: "index_painters_on_pagelink", unique: true
+    t.index ["rank"], name: "index_painters_on_rank", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
     t.index ["user_id"], name: "index_painters_on_user_id"
   end

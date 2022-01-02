@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope :api do
     resources :categories
-      devise_for :users,
+    devise_for :users,
                path: '',
                path_names: {
                  sign_in: 'login',
