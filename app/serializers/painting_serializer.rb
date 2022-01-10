@@ -1,7 +1,7 @@
 class PaintingSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :slug, :rankdate, :title, :abstract,
-             :dimension, :description, :created_at,
+             :dimension, :description, :created_at, :group_type,
              :images, :date_created, # :category,
              :pagelink, :painter, :user
 

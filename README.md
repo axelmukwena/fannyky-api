@@ -67,3 +67,7 @@ Ruby on Rails-based RESTful API serving the React-based front-end at https://git
 
 ### Generate new slug on slugged change
 - https://stackoverflow.com/a/38449957/8050183
+
+### Group types
+- Only Buda require group type, fanny uses date groupings
+- group_type: Creative Works, Landscapes in Japan, Sketches with Themes
