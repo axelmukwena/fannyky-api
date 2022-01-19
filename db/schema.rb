@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_045000) do
+ActiveRecord::Schema.define(version: 2022_01_19_163159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_045000) do
     t.string "link"
     t.string "pagelink", null: false
     t.integer "rank"
+    t.string "paintings_categories", default: [], array: true
     t.index ["pagelink"], name: "index_painters_on_pagelink", unique: true
     t.index ["rank"], name: "index_painters_on_rank", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
@@ -124,7 +125,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_045000) do
     t.string "dimension"
     t.string "pagelink", null: false
     t.date "rankdate"
-    t.string "group_type"
+    t.string "category"
     t.index ["pagelink"], name: "index_paintings_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["slug"], name: "index_paintings_on_slug", unique: true

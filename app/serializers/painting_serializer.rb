@@ -1,9 +1,8 @@
 class PaintingSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :slug, :rankdate, :title, :abstract,
-             :dimension, :description, :created_at, :group_type,
-             :images, :date_created, # :category,
-             :pagelink, :painter, :user
+             :dimension, :description, :created_at, :category,
+             :images, :date_created, :pagelink, :painter, :user
 
   # https://stackoverflow.com/a/50481652/8050183
   # Check application controller :active_storage_current_host

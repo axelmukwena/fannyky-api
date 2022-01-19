@@ -1,7 +1,7 @@
 class PaintingsController < ApplicationController
-  before_action :authorized, except: [:index, :show]
+  before_action :authorized, except: [:index, :show, :category_index]
   before_action :set_painter
-  before_action :set_painting, except: [:new, :create, :index]
+  before_action :set_painting, except: [:new, :create, :index, :category_index]
 
   def new
     @painting = Painting.new
@@ -22,6 +22,15 @@ class PaintingsController < ApplicationController
     @paintings = @painter.paintings.order(rankdate: :desc)
     @paintings.page params[:page]
     render json: @paintings
+  end
+
+  # get paintings based on category, only applies to buda
+  def category_index
+    if params.has_key?(:category)
+      @paintings = @painter.paintings.where(category: params[:category])
+      @paintings = @paintings.order(rankdate: :desc)
+      render json: @paintings
+    end
   end
 
   def show
@@ -80,7 +89,7 @@ class PaintingsController < ApplicationController
   def painting_params
     params.require(:painting).permit(:title, :pagelink, :description,
                                      :date_created, :rankdate, :abstract, :dimension,
-                                     :group_type, :painter_id, user: current_user)
+                                     :category, :painter_id, user: current_user)
   end
 
   # Friendly ID does not return Nil when record is not found
