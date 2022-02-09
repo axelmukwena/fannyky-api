@@ -25,3 +25,4 @@ gem "bcrypt", "~> 3.1"
 gem 'active_model_serializers', '~> 0.10.0'
 gem "jwt", "~> 2.3"
 gem "aws-sdk-s3", require: false
+gem "image_processing", ">= 1.2"
