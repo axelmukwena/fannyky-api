@@ -71,3 +71,9 @@ Ruby on Rails-based RESTful API serving the React-based front-end at https://git
 ### Group types
 - Only Buda require group type, fanny uses date groupings
 - group_type: Creative Works, Landscapes in Japan, Sketches with Themes
+
+### Kill all rails server
+
+```
+killall -9 ruby
+```
