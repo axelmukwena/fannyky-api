@@ -44,7 +44,11 @@ Ruby on Rails-based RESTful API serving the React-based front-end at https://git
  `ctrl+x`, then `y`, then `enter` to close and save if you’re using the nano editor.
 
 ### Processing images with ActiveStorage
+NB: No need to create signed urls. Just get the key and use that with Cloudfront. See `ActiveStorageUrl.md`  
+
  - https://www.microverse.org/blog/how-to-build-an-image-upload-feature-with-rails-and-active-storage
+ - https://stackoverflow.com/a/50481652/8050183
+ - Check application controller :active_storage_current_host
 
 ### Serializers
  - https://betterprogramming.pub/how-to-fire-up-a-rails-api-for-your-new-project-6fad595caf07
@@ -77,6 +81,3 @@ Ruby on Rails-based RESTful API serving the React-based front-end at https://git
 ```
 killall -9 ruby
 ```
-
-https://fannyky-api.herokuapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBHUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b7a3a513d173a4cb870d1c63e97c50feb999180c/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFISWFRSElPZ3h4ZFdGc2FYUjVhV2s9IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--9701a7554daf2c64e83a6dd8182a4ab24b091f48/Winter%20in%20July.jpg?w=256&q=40
-https://d15xq62teejj6h.cloudfront.net/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBHUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b7a3a513d173a4cb870d1c63e97c50feb999180c/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFISWFRSElPZ3h4ZFdGc2FYUjVhV2s9IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--9701a7554daf2c64e83a6dd8182a4ab24b091f48/Winter%20in%20July.jpg?w=256&q=40
