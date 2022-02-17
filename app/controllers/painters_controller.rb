@@ -69,14 +69,15 @@ class PaintersController < ApplicationController
 
   def painter_params
     params.require(:painter).permit(:name, :rank, :pagelink, :about, :email, :phone,
-                                    :link, paintings_categories: [], user: current_user)
+                                    :link, paintings_categories: [], menuitems: [],
+                                    user: current_user)
   end
 
   def set_painter
     begin
       @painter = Painter.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
-      render json: { record: false, message: 'Could not find painter.' }
+      render json: { success: true, record: false, message: 'Could not find painter.' }
     end
   end
 end

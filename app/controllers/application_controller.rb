@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
 
   # Mostly for internal use
   def authorized
-    render json: { success: false, message: 'Please log in' } unless logged_in?
+    render json: { success: false, user: nil, message: 'Please log in' } unless logged_in?
   end
 
   # For front end
