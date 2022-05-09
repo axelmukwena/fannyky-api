@@ -4,11 +4,6 @@ class PainterSerializer < ActiveModel::Serializer
              :exhibitions_count, :talks_count, :pagelink, :menuitems,
              :awards_count, :user, :paintings_categories, :images
 
-  def paintings_categories
-    return unless object.paintings_categories
-    JSON.parse(object.paintings_categories)
-  end
-
   def images
     return unless object.images.attachments
     object.images.map do |image|
