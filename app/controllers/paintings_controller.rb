@@ -26,10 +26,12 @@ class PaintingsController < ApplicationController
 
   # get paintings based on category, only applies to buda
   def category_index
-    if params.has_key?(:category)
-      @paintings = @painter.paintings.where(category: params[:category])
+    if params.has_key?(:category_slug)
+      @paintings = @painter.paintings.where(category_slug: params[:category_slug])
       @paintings = @paintings.order(rankdate: :desc)
       render json: @paintings
+    else
+      render json: { success: false, record: false }
     end
   end
 

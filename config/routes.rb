@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         post 'image', to: 'paintings#delete_image'
       end
 
-      get 'paintings_category/:category', to: 'paintings#category_index'
+      get 'paintings_category/:category_slug', to: 'paintings#category_index'
 
       resources :exhibitions do
         post 'images', to: 'exhibitions#create_images'

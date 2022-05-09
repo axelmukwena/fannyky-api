@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_16_235042) do
+ActiveRecord::Schema.define(version: 2022_05_09_173242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,14 +56,6 @@ ActiveRecord::Schema.define(version: 2022_02_16_235042) do
     t.index ["pagelink"], name: "index_awards_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_awards_on_painter_id"
     t.index ["user_id"], name: "index_awards_on_user_id"
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "exhibitions", force: :cascade do |t|
@@ -127,6 +119,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_235042) do
     t.string "pagelink", null: false
     t.date "rankdate"
     t.string "category"
+    t.string "category_slug"
     t.index ["pagelink"], name: "index_paintings_on_pagelink", unique: true
     t.index ["painter_id"], name: "index_paintings_on_painter_id"
     t.index ["slug"], name: "index_paintings_on_slug", unique: true
