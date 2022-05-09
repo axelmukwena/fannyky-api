@@ -5,12 +5,12 @@ class PainterSerializer < ActiveModel::Serializer
              :awards_count, :user, :paintings_categories, :images
 
   def paintings_categories
-    puts "------------------------"
-    puts "------------------------"
-    puts object.paintings_categories
-    puts "------------------------"
-    puts "------------------------"
     return unless object.paintings_categories.blank?
+    puts "------------------------"
+    puts "------------------------"
+    puts JSON.parse(object.paintings_categories)
+    puts "------------------------"
+    puts "------------------------"
     JSON.parse(object.paintings_categories)
   end
 
