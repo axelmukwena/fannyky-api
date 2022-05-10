@@ -91,7 +91,7 @@ class PaintingsController < ApplicationController
   def painting_params
     params.require(:painting).permit(:title, :pagelink, :description,
                                      :date_created, :rankdate, :abstract, :dimension,
-                                     :category, :painter_id, user: current_user)
+                                     :category, :category_slug, :painter_id, user: current_user)
   end
 
   # Friendly ID does not return Nil when record is not found
