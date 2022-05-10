@@ -69,7 +69,7 @@ class PaintersController < ApplicationController
 
   def painter_params
     params.require(:painter).permit(:name, :rank, :pagelink, :about, :email, :phone,
-                                    :link, paintings_categories: [], menuitems: [],
+                                    :link, :paintings_categories, menuitems: [],
                                     user: current_user)
   end
 
@@ -80,4 +80,5 @@ class PaintersController < ApplicationController
       render json: { success: true, record: false, message: 'Could not find painter.' }
     end
   end
+
 end

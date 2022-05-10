@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope :api do
-      devise_for :users,
-               path: '',
+    devise_for :users,
+               path: 'auth',
                path_names: {
                  sign_in: 'login',
                  sign_out: 'logout',
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
                }
 
     get '/authorize', to: 'application#authorize'
-    get '/painters', to: 'painters#index'
 
     # I'm using posts to create/remove images because
     # delete does not accept payloads and Authorization token

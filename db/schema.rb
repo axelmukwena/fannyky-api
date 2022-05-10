@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_09_224307) do
+ActiveRecord::Schema.define(version: 2022_05_10_005607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_05_09_224307) do
     t.string "pagelink", null: false
     t.integer "rank"
     t.string "menuitems", default: [], array: true
-    t.string "paintings_categories", default: ""
+    t.string "paintings_categories", default: "[]"
     t.index ["pagelink"], name: "index_painters_on_pagelink", unique: true
     t.index ["rank"], name: "index_painters_on_rank", unique: true
     t.index ["slug"], name: "index_painters_on_slug", unique: true
